@@ -1,6 +1,6 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Awesome books ES6
+# Awesome books
  
 In this project, We build the Awesome books application by using JavaScript ES6.
 

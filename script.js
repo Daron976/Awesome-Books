@@ -1,61 +1,65 @@
-const availableBooks = [
-  {
-    id: 0,
-    title: 'Harry Potter',
-    author: 'J.K. Rowling'
-  },
-  {
-    id: 1,
-    title: 'The Mark',
-    author: 'Edyth Bulbring'
-  }
-];
-
-function book(id, title, author) {
-    this.id = id,
-    this.title = title,
-    this.author = author
-}
-
-function addBook(id, title, author) {
-  let addedBook = new book(id, title, author);
-  availableBooks.push(addedBook);
-}
-
-
-
-function removeBook(index) {
-  availableBooks.splice(index, 1);
-}
-
-let mapLoop = availableBooks.map((i) => {
-  return `
-  <article class="book-item">
-      <p class="title">${i.title}</p>
-      <p class="author">${i.author}</p>
-      <button type="button" class="remove-btn">Remove</button>
-  </article>`
-})
-
-let htmlDisplay = 
-`
-  <div class="books">
-  ${mapLoop}
-  </div>
-  <hr>
-  <div class="add-books">
-      <input type="text" id="title" name="title" placeholder="Book Title" required>
-      <input type="text" id="author" name="author" placeholder="Author" required>
-      <button type="button" class="add-btn">Add</button>
-  </div>
-`;
-
-const displaySection = document.querySelector('.initial-header');
-displaySection.insertAdjacentHTML('afterend', htmlDisplay);
-
-const addBtn = document.querySelector('.add-btn');
-const titleText = document.getElementById('title');
+const displaySection = document.querySelector('.bookstore');
 const authorText = document.getElementById('author');
+const titleText = document.getElementById('title');
+const addBtn = document.getElementById('addBtn');
+
+let availableBooks = [];
+
+const addBook = (e) => {
+  e.preventDefault();
+  const addedBook = {
+    title: title.value,
+    author: author.value,
+  };
+
+availableBooks.push(addedBook);
+clear();
+ saveToLocalStorage(availableBooks);
+  displayItem();
+};
+
+const clear = () => {
+  title.value = '';
+  author.value = '';
+};
+
+// save to localStorage
+
+const saveToLocalStorage = (availableBooks) => localStorage.setItem('availableBooks', JSON.stringify(availableBooks));
+
+// get from localStorage
+
+const getFromLocalStorage = () => {
+if (JSON.parse(localStorage.getItem('availableBooks'))) availableBooks = JSON.parse(localStorage.getItem('availableBooks'));};
 
 
-addBtn.addEventListener('click', addBook((availableBooks.length), titleText.value, authorText.value));
+const displayItem = () => {
+  getFromLocalStorage();
+  displaySection.innerHTML = '';
+  availableBooks.forEach((availableBook, i) => {
+    displaySection.innerHTML += `<div class="availableBook">
+        <p>${availableBook.title}</p>
+        <p>${availableBook.author}</p></div>`;
+
+const removeBtn = document.createElement('button');
+    removeBtn.textContent = 'Remove';
+    removeBtn.classList.add('remove');
+    displaySection.appendChild(removeBtn);
+
+const deleteBtn = document.querySelector('.remove');
+    deleteBtn.addEventListener('click', () => {
+    deleteBook(i);
+    });
+  });
+};
+
+const deleteBook = (i) => {
+  const filterBooks = availableBooks.filter((book) => book !== availableBooks[i]);
+  saveToLocalStorage(filterBooks);
+  displayItem();
+};
+
+addBtn.addEventListener('click', addBook);
+document.addEventListener('DOMContentLoaded', () => {
+  displayItem();
+});

@@ -1,16 +1,11 @@
+ /* eslint-disable */ 
+
 const displaySection = document.querySelector('.bookstore');
 const author = document.getElementById('author');
 const title = document.getElementById('title');
 const addBtn = document.getElementById('addBtn');
 
 let availableBooks = [];
-
-const addBook = (e) => {
-  e.preventDefault();
-  const addedBook = {
-    title: title.value,
-    author: author.value,
-  };
 
   // save to localStorage
 
@@ -21,7 +16,7 @@ const addBook = (e) => {
   const getFromLocalStorage = () => {
     if (JSON.parse(localStorage.getItem('availableBooks'))) availableBooks = JSON.parse(localStorage.getItem('availableBooks'));
   };
-
+  
   const displayItem = () => {
     getFromLocalStorage();
     displaySection.innerHTML = '';
@@ -29,12 +24,6 @@ const addBook = (e) => {
       displaySection.innerHTML += `<div class="availableBook">
         <p>${availableBook.title}</p>
         <p>${availableBook.author}</p></div>`;
-
-      const deleteBook = (i) => {
-        const filterBooks = availableBooks.filter((book) => book !== availableBooks[i]);
-        saveToLocalStorage(filterBooks);
-        displayItem();
-      };
 
       const removeBtn = document.createElement('button');
       removeBtn.textContent = 'Remove';
@@ -53,13 +42,27 @@ const addBook = (e) => {
     author.value = '';
   };
 
+  const addBook = (e) => {
+  e.preventDefault();
+  const addedBook = {
+    title: title.value,
+    author: author.value,
+  };
+
   availableBooks.push(addedBook);
   clear();
   saveToLocalStorage(availableBooks);
   displayItem();
 };
 
+const deleteBook = (i) => {
+const filterBooks = availableBooks.filter((availableBook) => availableBook !== availableBooks[i]);
+saveToLocalStorage(filterBooks);
+displayItem();
+};
+
 addBtn.addEventListener('click', addBook);
+
 document.addEventListener('DOMContentLoaded', () => {
 // eslint-disable-next-line
   displayItem();

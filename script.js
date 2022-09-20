@@ -1,4 +1,4 @@
- /* eslint-disable */ 
+/* eslint-disable */ 
 
 const displaySection = document.querySelector('.bookstore');
 const author = document.getElementById('author');

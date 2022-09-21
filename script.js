@@ -22,8 +22,7 @@ let availableBooks = [];
     displaySection.innerHTML = '';
     availableBooks.forEach((availableBook, i) => {
       displaySection.innerHTML += `<div class="availableBook">
-        <p>${availableBook.title}</p>
-        <p>${availableBook.author}</p>
+        <p>"${availableBook.title}" by ${availableBook.author}</p>
         <button class="remove" value=${availableBook.id}>Remove</button>
         </div>`;
 

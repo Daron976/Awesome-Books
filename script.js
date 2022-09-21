@@ -23,17 +23,14 @@ let availableBooks = [];
     availableBooks.forEach((availableBook, i) => {
       displaySection.innerHTML += `<div class="availableBook">
         <p>${availableBook.title}</p>
-        <p>${availableBook.author}</p></div>`;
+        <p>${availableBook.author}</p>
+        <button class="remove" value=${availableBook.id}>Remove</button>
+        </div>`;
 
-      const removeBtn = document.createElement('button');
-      removeBtn.textContent = 'Remove';
-      removeBtn.classList.add('remove');
-      displaySection.appendChild(removeBtn);
-
-      const deleteBtn = document.querySelector('.remove');
-      deleteBtn.addEventListener('click', () => {
-        deleteBook(i);
-      });
+      const deleteBtn = document.querySelectorAll('.remove');
+      for (let i = 0; i < deleteBtn.length; i++) {
+        deleteBtn[i].addEventListener('click', deleteBook);
+      };
     });
   };
 
@@ -47,6 +44,7 @@ let availableBooks = [];
   const addedBook = {
     title: title.value,
     author: author.value,
+    id: availableBooks.length,
   };
 
   availableBooks.push(addedBook);
@@ -55,10 +53,13 @@ let availableBooks = [];
   displayItem();
 };
 
-const deleteBook = (i) => {
-const filterBooks = availableBooks.filter((availableBook) => availableBook !== availableBooks[i]);
-saveToLocalStorage(filterBooks);
-displayItem();
+const deleteBook = (e) => {
+  const val = e.target.value;
+  const filterBooks = availableBooks.filter(function (availableBook) {
+    return availableBook.id != val;
+  });
+  saveToLocalStorage(filterBooks);
+  displayItem();
 };
 
 addBtn.addEventListener('click', addBook);

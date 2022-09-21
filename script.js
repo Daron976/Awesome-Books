@@ -5,65 +5,71 @@ const author = document.getElementById('author');
 const title = document.getElementById('title');
 const addBtn = document.getElementById('addBtn');
 
-let availableBooks = [];
+class Book {
+  availableBooks;
+
+  constructor() {
+    this.getFromLocalStorage();
+  }
 
   // save to localStorage
 
-  const saveToLocalStorage = (availableBooks) => localStorage.setItem('availableBooks', JSON.stringify(availableBooks));
+  saveToLocalStorage = (addedBooks) => localStorage.setItem('availableBooks', JSON.stringify(addedBooks));
 
   // get from localStorage
 
-  const getFromLocalStorage = () => {
-    if (JSON.parse(localStorage.getItem('availableBooks'))) availableBooks = JSON.parse(localStorage.getItem('availableBooks'));
+  getFromLocalStorage = () => {
+    this.availableBooks = JSON.parse(localStorage.getItem('availableBooks')) ?? [];
   };
   
-  const displayItem = () => {
+  displayItem = () => {
     getFromLocalStorage();
     displaySection.innerHTML = '';
-    availableBooks.forEach((availableBook, i) => {
+    this.availableBooks.forEach((availableBook, i) => {
       displaySection.innerHTML += `<div class="availableBook">
         <p>${availableBook.title}</p>
-        <p>${availableBook.author}</p></div>`;
-
-      const removeBtn = document.createElement('button');
-      removeBtn.textContent = 'Remove';
-      removeBtn.classList.add('remove');
-      displaySection.appendChild(removeBtn);
-
-      const deleteBtn = document.querySelector('.remove');
-      deleteBtn.addEventListener('click', () => {
-        deleteBook(i);
-      });
-    });
+        <p>${availableBook.author}</p>
+        <button class="remove" id=${i}>Remove</button></div>`;
+         });
   };
 
-  const clear = () => {
-    title.value = '';
-    author.value = '';
-  };
-
-  const addBook = (e) => {
+  addBook = (e) => {
   e.preventDefault();
   const addedBook = {
     title: title.value,
     author: author.value,
   };
 
-  availableBooks.push(addedBook);
-  clear();
-  saveToLocalStorage(availableBooks);
-  displayItem();
+  this.availableBooks.push(addedBook);
+  this.clear();
+  this.saveToLocalStorage(this.availableBooks);
+  this.displayItem();
 };
 
-const deleteBook = (i) => {
-const filterBooks = availableBooks.filter((availableBook) => availableBook !== availableBooks[i]);
-saveToLocalStorage(filterBooks);
-displayItem();
+deleteBook = (i) => {
+const filterBooks = this.availableBooks.filter((availableBook) => availableBook !== this.availableBooks[i]);
+this.saveToLocalStorage(filterBooks);
+this.displayItem();
 };
 
-addBtn.addEventListener('click', addBook);
+clear = () => {
+    title.value = '';
+    author.value = '';
+  };
+}
+
+const availableBook = new Book();
 
 document.addEventListener('DOMContentLoaded', () => {
 // eslint-disable-next-line
-  displayItem();
+  availableBook.displayItem();
+});
+
+addBtn.addEventListener('click', availableBook.addBook);
+
+displaySection.addEventListener('click', (e) => {
+  if (e.target.classList.contains('remove')) {
+    const targetId = +e.target.getAttribute('id');
+    availableBook.deleteBook(targetId);
+  }
 });

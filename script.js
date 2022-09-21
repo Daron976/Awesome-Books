@@ -77,3 +77,34 @@ displaySection.addEventListener('click', (e) => {
     availableBook.deleteBook(targetId);
   }
 });
+
+const mainContent = document.getElementById('main');
+const addition = document.getElementById('add-new-books');
+const contact = document.getElementById('contact');
+const mainPage = document.getElementsByClassName('main-page');
+const additionPage = document.getElementsByClassName('add-books-page');
+const contactPage = document.getElementsByClassName('contact-page');
+
+const list = () => {
+  mainContent.style.display = 'flex';
+  addition.style.display = 'none';
+  contact.style.display= 'none';
+}
+
+const addNew = () => {
+  mainContent.style.display = 'none';
+  addition.style.display = 'flex';
+  contact.style.display= 'none';
+}
+
+const contactUs = () => {
+  mainContent.style.display = 'none';
+  addition.style.display = 'none';
+  contact.style.display= 'flex';
+}
+
+for (let i = 0; i < 2; i++) {
+  mainPage[i].addEventListener('click', list);
+  additionPage[i].addEventListener('click', addNew);
+  contactPage[i].addEventListener('click', contactUs);
+}

@@ -5,34 +5,23 @@ const author = document.getElementById('author');
 const title = document.getElementById('title');
 const addBtn = document.getElementById('addBtn');
 
-class Book {
-  availableBooks;
-
-  constructor() {
-    this.getFromLocalStorage();
-  }
+let availableBooks = [];
 
   // save to localStorage
 
-  saveToLocalStorage = (addedBooks) => localStorage.setItem('availableBooks', JSON.stringify(addedBooks));
+  const saveToLocalStorage = (availableBooks) => localStorage.setItem('availableBooks', JSON.stringify(availableBooks));
 
   // get from localStorage
 
-  getFromLocalStorage = () => {
-    this.availableBooks = JSON.parse(localStorage.getItem('availableBooks')) ?? [];
+  const getFromLocalStorage = () => {
+    if (JSON.parse(localStorage.getItem('availableBooks'))) availableBooks = JSON.parse(localStorage.getItem('availableBooks'));
   };
-  
-  displayItem = () => {
+
+  const displayItem = () => {
     getFromLocalStorage();
     displaySection.innerHTML = '';
-    this.availableBooks.forEach((availableBook, i) => {
+    availableBooks.forEach((availableBook, i) => {
       displaySection.innerHTML += `<div class="availableBook">
-<<<<<<< HEAD
-        <p>${availableBook.title}</p>
-        <p>${availableBook.author}</p>
-        <button class="remove" id=${i}>Remove</button></div>`;
-         });
-=======
         <p>"${availableBook.title}" by ${availableBook.author}</p>
         <button class="remove" value=${availableBook.id}>Remove</button>
         </div>`;
@@ -42,10 +31,14 @@ class Book {
         deleteBtn[i].addEventListener('click', deleteBook);
       };
     });
->>>>>>> 99a829321d660549c27652f8d8bd0d32cd746f7e
   };
 
-  addBook = (e) => {
+  const clear = () => {
+    title.value = '';
+    author.value = '';
+  };
+
+  const addBook = (e) => {
   e.preventDefault();
   const addedBook = {
     title: title.value,
@@ -53,18 +46,12 @@ class Book {
     id: availableBooks.length,
   };
 
-  this.availableBooks.push(addedBook);
-  this.clear();
-  this.saveToLocalStorage(this.availableBooks);
-  this.displayItem();
+  availableBooks.push(addedBook);
+  clear();
+  saveToLocalStorage(availableBooks);
+  displayItem();
 };
 
-<<<<<<< HEAD
-deleteBook = (i) => {
-const filterBooks = this.availableBooks.filter((availableBook) => availableBook !== this.availableBooks[i]);
-this.saveToLocalStorage(filterBooks);
-this.displayItem();
-=======
 const deleteBook = (e) => {
   const val = e.target.value;
   const filterBooks = availableBooks.filter(function (availableBook) {
@@ -72,27 +59,11 @@ const deleteBook = (e) => {
   });
   saveToLocalStorage(filterBooks);
   displayItem();
->>>>>>> 99a829321d660549c27652f8d8bd0d32cd746f7e
 };
 
-clear = () => {
-    title.value = '';
-    author.value = '';
-  };
-}
-
-const availableBook = new Book();
+addBtn.addEventListener('click', addBook);
 
 document.addEventListener('DOMContentLoaded', () => {
 // eslint-disable-next-line
-  availableBook.displayItem();
-});
-
-addBtn.addEventListener('click', availableBook.addBook);
-
-displaySection.addEventListener('click', (e) => {
-  if (e.target.classList.contains('remove')) {
-    const targetId = +e.target.getAttribute('id');
-    availableBook.deleteBook(targetId);
-  }
+  displayItem();
 });

@@ -5,10 +5,12 @@
   box-sizing: border-box;
 }
 
-
 body {
   background-image: radial-gradient(rgb(74 189 172/ 0.95), rgb(74 189 172/ 0.9)), url(images/bckground.jpg);
-  grid-template-columns: 10% auto auto auto 10% ;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
 }
 
 .nav-content-container {
@@ -16,7 +18,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
-  background-color: rgba(223, 220, 227, 0.9);
+  background-color: rgba(223, 220, 227);
   position: fixed;
   width: 100%;
   top: 0;
@@ -35,36 +37,23 @@ a {
   font-size: 1.2rem;
 }
 
-/* .logo {
-  display: none;
-} */
-
-/* .fa-bars:before {
+/* .fa-xmark:before {
   content: "\f00d";
   display: none;
 } */
-
-.fa-xmark:before {
-  content: "\f00d";
-  display: none;
-}
 
 .desktop {
   display: none;
 }
 
-.nav-links {
+#mobile {
   display: none;
   flex-direction: column;
   justify-content: flex-start;
   height: 100vh;
   font-size: 1.5rem;
   gap: 1rem;
-}
-
-.nav-link-items,
-.fa-xmark {
-  display: none;
+  padding-top: 1rem;
 }
 
 header button {
@@ -82,17 +71,12 @@ h2 {
   font-size: 2rem;
 }
 
-/* .main-content h1 {
-  margin-top: 7rem;
-} */
-
 .main-content, 
 .add-books,
 .contact-info {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* width: 100vh; */
   gap: 1rem;
   margin-top: 5rem;
 }
@@ -125,7 +109,8 @@ h2 {
   border: 2px solid white;
   padding: 0.5rem 1rem;
   gap: 1.5rem;
-  /* animation: appearance 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both; */
+  animation: appearance 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+  z-index: -1;
 }
 
 .bookstore:empty {
@@ -137,7 +122,7 @@ h2 {
   justify-content: space-between;
   gap: 8.5rem;
   align-items: center;
-  /* animation: appearance 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both; */
+  animation: appearance 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }
 
 .break {
@@ -194,6 +179,10 @@ h2 {
   box-shadow: 2.5px 5px 10px #2b2036;
 }
 
+label {
+  visibility: hidden;
+}
+
 @media screen and (min-width: 768px) {
   .bookstore {
     width: 90%;
@@ -218,14 +207,9 @@ h2 {
     display: block;
   }
 
-  /* .nav-content-container {
-    justify-content: space-around;
-  } */
-
   .copyright {
     height: auto;
     position: fixed;
-    /* vertical-align: bottom; */
   }
 
   .availableBook {

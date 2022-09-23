@@ -8,46 +8,58 @@
     <script src="https://kit.fontawesome.com/8f283d01ad.js" crossorigin="anonymous"></script>
     <title>Awesome Books</title>
 </head>
+
 <body>
     <header class="nav-container">
+
         <nav class="nav-bar">
             <div class="nav-content-container">
                 <div id="logo">
-                    <a href="#main" class="logo-text">Awesome<br> Books</a>
+                <a href="#main" class="logo-text">Awesome<br> Books</a>
                 </div>
                 <button type="button" id="open"><i class="fa-solid fa-bars fa-2x"></i></button>
-                <ul id="mobile" class="nav-links">
+                <!-- <ul id="mobile" class="nav-links">
                     <li id="close-menu"><button type="button" class="close"><i class="fa-solid fa-xmark fa-2x"></i></button></li>
                     <li class="nav-link-items"><a href="#main" class="main-page">List</a></li>
                     <li class="nav-link-items"><a href="#add-new-books" class="add-books-page">Add New</a></li>
                     <li class="nav-link-items"><a href="#contact" class="contact-page">Contact</a></li>
-                </ul>
+                </ul> -->
                 <ul class="nav-links desktop">
-                    <li class="nav-link-items"><a href="#main" class="main-page">List</a></li>
-                    <li class="nav-link-items"><a href="#add-new-books" class="add-books-page">Add New</a></li>
-                    <li class="nav-link-items"><a href="#contact" class="contact-page">Contact</a></li>
+                    <li class="nav-link-items list">List</li><li>|</li>
+                    <li class="nav-link-items addNew">Add New</li><li>|</li>
+                    <li class="nav-link-items contact">Contact</li><li>|</li>
                 </ul>
             </div>
         </nav>
+
+        <div class="date"></div>
     </header>
+
     <section id="main" class="main-content">    
-        <h1>Awesome Books</h1>
-        <div class="bookstore"></div>
-        <hr class="break">
+    <h1>Awesome Books</h1>
+    <div class="bookstore"></div>
+    <hr class="break">
     </section>
-    <section id="add-new-books" class="add-books">
-        <h2 class="secondary-header">Add a new book</h2>
+
+    <section id="add-new-books" class="add-books hidden">
+    <h2 class="secondary-header">Add a new book</h2>
+
         <form action="" class="add-form">
             <label for="author"></label>
+            
             <input type="text" name="author" id="author" placeholder="Author" class="book-info"/>
+            
             <label for="title"></label>
             <input type="text" name="title" id="title" placeholder="Title" class="book-info"/>
+
             <div class="btn-end">
                 <input id="addBtn" type="submit" value="Add"/>
             </div>
         </form>
+
     </section>
-    <section id="contact" class="contact-info">
+
+    <section class="contact-info hidden">
         <h2 class="secondary-header">Contact Information</h2>
         <p class="contact-msg">
             If you would like to contact us and find out more<br>
@@ -59,11 +71,14 @@
             <li class="contact-detail-item"><i class="fa-solid fa-location-dot"></i>   22, 84503 london, England</li>
         </ul>
     </section>
+
     <footer class="copyright">
         <div class="footer-height">
             <p class="copyright-text"><i class="fa-regular fa-copyright"></i> 2022 Awesome Books All Rights Reserved</p>
         </div>
     </footer>
-    <script src="script.js"></script>
+
+    <script type="module" src="script.js"></script>
+
 </body>
 </html>

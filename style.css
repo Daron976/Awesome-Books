@@ -7,6 +7,67 @@
 
 body {
   background-image: radial-gradient(rgb(74 189 172/ 0.95), rgb(74 189 172/ 0.9)), url(images/bckground.jpg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+.nav-content-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: rgba(223, 220, 227);
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+#current-date {
+  position: fixed;
+  top: 5rem;
+  right: 1rem;
+  color: #2b2036;
+  overflow-y: hidden;
+  z-index: -2;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #2b2036;
+}
+
+.logo-text {
+  font-size: 1.2rem;
+}
+
+/* .fa-xmark:before {
+  content: "\f00d";
+  display: none;
+} */
+
+.desktop {
+  display: none;
+}
+
+#mobile {
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100vh;
+  font-size: 1.5rem;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+header button {
+  background: none;
+  border: none;
 }
 
 h1,
@@ -19,14 +80,35 @@ h2 {
   font-size: 2rem;
 }
 
-.main-content {
+.main-content, 
+.add-books,
+.contact-info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
-  /* width: 100vh; */
   gap: 1rem;
+  margin-top: 5rem;
+}
+
+.add-books {
+  display: none;
+}
+
+.contact-info {
+  display: none;
+}
+
+.copyright {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background: rgba(74, 189, 172);
+  padding: 1rem 0.5rem;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+
 }
 
 .bookstore {
@@ -77,6 +159,19 @@ h2 {
   border-radius: 5px;
 }
 
+.contact-info {
+  align-items: center;
+  color: #2b2036;
+  padding: 0.5rem 1rem;
+}
+
+.contact-info ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
 #addBtn, 
 .remove {
   padding: 0.5rem 1rem;
@@ -92,9 +187,37 @@ h2 {
   box-shadow: 2.5px 5px 10px #2b2036;
 }
 
-@media screen and (max-width: 768px) {
+label {
+  visibility: hidden;
+}
+
+@media screen and (min-width: 768px) {
   .bookstore {
     width: 90%;
+  }
+
+  .fa-bars {
+    display: none;
+  }
+
+  .fa-bars::before {
+    display: none;
+  }
+
+  .desktop {
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    gap: 2rem;
+  }
+
+  .desktop .nav-link-items {
+    display: block;
+  }
+
+  .copyright {
+    height: auto;
+    position: fixed;
   }
 
   .availableBook {

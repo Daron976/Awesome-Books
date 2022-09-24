@@ -81,6 +81,8 @@ const openBtn = document.getElementById('open');
 const mobileMenu = document.getElementById('mobile');
 const closeBtn = document.getElementById('close-menu')
 
+document.getElementById('current-date').textContent = new Date().toUTCString()
+
 const openMenu = () => {
   mobileMenu.style.display = 'flex';
   openBtn.style.display = 'none';

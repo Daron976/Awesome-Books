@@ -24,6 +24,15 @@ body {
   top: 0;
 }
 
+#current-date {
+  position: fixed;
+  top: 5rem;
+  right: 1rem;
+  color: #2b2036;
+  overflow-y: hidden;
+  z-index: -2;
+}
+
 li {
   list-style: none;
 }
@@ -110,7 +119,6 @@ h2 {
   padding: 0.5rem 1rem;
   gap: 1.5rem;
   animation: appearance 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
-  z-index: -1;
 }
 
 .bookstore:empty {

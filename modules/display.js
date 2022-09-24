@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 import { displaySection } from './navigation.js';
 import { getFromLocalStorage } from './storage.js';
 

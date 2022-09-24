@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 // save to localStorage
 export const  saveToLocalStorage = (addedBooks) => localStorage.setItem('availableBooks', JSON.stringify(addedBooks));
   

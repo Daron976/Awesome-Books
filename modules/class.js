@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 import { title, author } from './navigation.js';
 import { displayItem } from './display.js';
 import { saveToLocalStorage, getFromLocalStorage } from './storage.js';

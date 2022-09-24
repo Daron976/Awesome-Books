@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 export const contact = document.querySelector('contact');
 export const displaySection = document.querySelector('.bookstore');
 export const author = document.getElementById('author');
